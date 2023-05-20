@@ -2,7 +2,6 @@ package com.example.InstagramClone.controller;
 
 import com.example.InstagramClone.dto.SignInInput;
 import com.example.InstagramClone.dto.SignInOutput;
-import com.example.InstagramClone.dto.SignUpInput;
 import com.example.InstagramClone.dto.SignUpOutput;
 import com.example.InstagramClone.model.User;
 import com.example.InstagramClone.service.TokenService;
@@ -12,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -25,7 +22,7 @@ public class UserController {
     TokenService authService;
 
     @PostMapping("/signup")
-    public SignUpOutput signUp(@RequestBody SignUpInput signUpDto) {
+    public SignUpOutput signUp(@RequestBody User signUpDto) {
         return userService.signup(signUpDto);
     }
 

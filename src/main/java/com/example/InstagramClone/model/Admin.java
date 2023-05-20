@@ -1,29 +1,34 @@
-package com.example.InstagramClone.dto;
+package com.example.InstagramClone.model;
 
-import jakarta.persistence.Column;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SignUpInput {
-    private Long userId;
+@Entity
+@Table(name = "InstagramAdmin")
+public class Admin {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long adminId;
+
+    @Column(nullable = false)
     @NotEmpty
     private String firstName;
+
+    @Column(nullable = false)
     @NotEmpty
     private String lastName;
-    private Integer age;
+
+    @Column(nullable = false)
     @NotBlank(message = "Email is mandatory")
-    @Email
-    private String email;
-    private String password;
-    @Pattern(regexp = "\\d{2}-\\d{10}", message = "Phone number should be in the format XX-XXXXXXXXXX")
-    private String phoneNumber;
+    @Email(regexp = "[A-Za-z0-9]+@admin\\.com")
+    private String adminEmail;
 }

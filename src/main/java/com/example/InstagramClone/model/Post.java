@@ -20,6 +20,7 @@ public class Post {
     private Timestamp createdDate;
     private Timestamp updatedDate;
     private String postData;
+
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 

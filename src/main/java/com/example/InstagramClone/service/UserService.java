@@ -2,7 +2,6 @@ package com.example.InstagramClone.service;
 
 import com.example.InstagramClone.dto.SignInInput;
 import com.example.InstagramClone.dto.SignInOutput;
-import com.example.InstagramClone.dto.SignUpInput;
 import com.example.InstagramClone.dto.SignUpOutput;
 import com.example.InstagramClone.model.AuthenticationToken;
 import com.example.InstagramClone.model.User;
@@ -29,7 +28,7 @@ public class UserService {
     @Autowired
     ITokenRepository tokenRepository;
 
-    public SignUpOutput signup(SignUpInput signUpDto) {
+    public SignUpOutput signup(User signUpDto) {
 
         // check if user exists or not based on email
         User user = userRepository.findFirstByEmail(signUpDto.getEmail());
@@ -47,10 +46,9 @@ public class UserService {
         }
 
         // save the user
-        user = new User(signUpDto.getFirstName(), signUpDto.getLastName(),
-                signUpDto.getAge(),  signUpDto.getEmail(), encryptedPassword, signUpDto.getPhoneNumber());
+        signUpDto.setPassword(encryptedPassword);
 
-        userRepository.save(user);
+        userRepository.save(signUpDto);
 
         return new SignUpOutput("User Registered","Welcome to Instagram");
     }
